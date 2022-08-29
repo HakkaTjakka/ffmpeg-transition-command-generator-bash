@@ -1,5 +1,7 @@
 #!/bin/bash
 
-./test.sh russel.mp4
+./test_transition.sh russel.mp4
 ./ffmpeg_command.sh
+
+./test_plus.sh
 

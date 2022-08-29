@@ -33,4 +33,4 @@ bin2/ffmpeg \
 -map "[outv]" \
 -map "[outa]" \
 -c:v h264_nvenc -pix_fmt yuv420p -preset fast -movflags faststart \
--y output.mp4
+-y output_transition.mp4
