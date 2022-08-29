@@ -13,7 +13,7 @@ GET_INFO_VIDEO () {
 #  FRAMES=$(ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of default=noprint_wrappers=1:nokey=1 "$1")
   FRAMES=$(echo "($L * $FPS)"| bc -l);
 
-  L="${L%0000}"
+  L="${L%????}"
   FRAMES="${FRAMES%.*}"
 
   echo INDEX=$NUM NAME=$1 LENGTH=$L FPS=$FPS FRAMES=$FRAMES # $2 $3
