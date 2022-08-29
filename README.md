@@ -25,7 +25,7 @@ transitions/                        Uses directory transitions for shaders. (Als
 
 vf_gltransition.c
 ffmpeg-gl-transition.tar.xz
-# define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
+/# define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
 
 COMMENTED OUT IN:
 
