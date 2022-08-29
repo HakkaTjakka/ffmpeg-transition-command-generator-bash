@@ -1,5 +1,5 @@
 # ffmpeg transition command generator (bash)
-Generates ffmpeg command ((2) transitions) for auto transitions between video's. Uses FFmpeg-Plus-OpenGL
+Generates ffmpeg command ((2) transitions) for auto transitions between video's. (1) Uses FFmpeg-Plus-OpenGL
 
 Two OpenGL transition add-ons for ffmpeg with shaders:
 
