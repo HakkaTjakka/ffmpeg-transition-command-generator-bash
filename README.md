@@ -24,14 +24,12 @@ FFmpeg-Patched-gl-transition.tar.xz Patched ffmpeg (ffmpeg.tar.gz, 4.3.1) accord
 transitions/                        Uses directory transitions for shaders. (Also inside gl-transitions.tar.xz) (In root for testing purposes)
 
 vf_gltransition.c
-ffmpeg-gl-transition.tar.xz
-/# define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
+ffmpeg-gl-transition.tar.xz # define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
 
-COMMENTED OUT IN:
+COMMENTED (//) OUT IN:
 
 FFmpeg-Patched-gl-transition.tar.xz
-vf_gltransition.c
-//# define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
+vf_gltransition.c //# define GL_TRANSITION_USING_EGL //remove this line if you don't want to use EGL
 
 Linux executables with nvenc encoding in bin2
 ./ffmpeg -v 0 -filters | grep gltransition
