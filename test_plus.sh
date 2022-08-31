@@ -185,7 +185,7 @@ MAIN () {
   echo "-map \"[outv]\" \\" >> ffmpeg_command.part.plus3
   echo "-map \"[outa]\" \\" >> ffmpeg_command.part.plus3
 #  echo "-an \\" >> ffmpeg_command.part.plus3
-  echo "-c:v h264_nvenc -pix_fmt yuv420p -preset fast -movflags faststart \\" >> ffmpeg_command.part.plus3
+  echo "-c:v h264_nvenc -pix_fmt yuv420p -preset fast -movflags faststart -vsync 2 \\" >> ffmpeg_command.part.plus3
   echo "-y output_plus_auto.mp4" >> ffmpeg_command.part.plus3
 
   cat ffmpeg_command.part.plus1 > ffmpeg_command.plus.sh

@@ -1,0 +1,6 @@
+[out0][out1][out2][out3][out4][out5][out6][out7][out8][out9][out10][out11][out12][out13][out14][out15][out16][out17][out18][out19][out20][out21][out22][out23][out24][out25][out26][out27][out28][out29][out30][out31][out32][out33][out34][out35][out36][out37][out38][out39][out40][out41][out42][out43][out44][out45][out46][out47][out48][out49][v50a]concat=n=51[outv] \
+" \
+-map "[outv]" \
+-map "[outa]" \
+-c:v h264_nvenc -pix_fmt yuv420p -preset slow -movflags faststart -vsync 2 \
+-y output_plus_auto.mp4
