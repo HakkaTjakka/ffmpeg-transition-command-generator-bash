@@ -1,9 +1,8 @@
 # ffmpeg transition command generator (bash)
 Generates ffmpeg command ((2) transitions) for auto transitions between video's. (1) Uses FFmpeg-Plus-OpenGL
-
 *****************************
-
-
+![clipboard_small](https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/output_plus_auto.gif)
+*****************************
 Added just like on transitions ffmpeg command generator in:
   https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/test_plus.sh
 
@@ -61,3 +60,4 @@ Soon: new shaders (Plus-OpenGL vertex + fragment) (transition .glsl only?) for m
 ***
 ![clipboard_small](https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/3.jpg)
 ***
+
