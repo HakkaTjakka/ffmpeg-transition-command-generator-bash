@@ -54,3 +54,10 @@ Soon: new shaders (Plus-OpenGL vertex + fragment) (transition .glsl only?) for m
 
 
  
+***
+![clipboard_small](https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/1.jpg)
+***
+![clipboard_small](https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/2.jpg)
+***
+![clipboard_small](https://github.com/HakkaTjakka/ffmpeg-transition-command-generator-bash/blob/main/3.jpg)
+***
