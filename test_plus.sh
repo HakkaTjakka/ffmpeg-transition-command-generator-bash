@@ -166,19 +166,13 @@ MAIN () {
                     else 
                         echo "[outa"$i"]["$n":a]acrossfade=duration="$TRANSTIME"[outa]; \\" >> ffmpeg_command.part.plus2
                     fi
-#                    echo "[outa"$i"]["$n":a]acrossfade=duration="$TRANSTIME"[outa]; \\" >> ffmpeg_command.part.plus2
                     echo "["$n":v]trim="$TRANSTIME":"$LENGTH_NI",setpts=PTS-STARTPTS[v"$n"a]; \\" >> ffmpeg_command.part.plus2
-#                else 
-#                    echo "[outa"$i"]["$n":a]acrossfade=duration="$TRANSTIME"[outa"$n"]; \\" >> ffmpeg_command.part.plus2
-#                    echo "[outa"$i"]["$n":a]acrossfade=duration="$TRANSTIME"[outa]; \\" >> ffmpeg_command.part.plus2
-#                    echo "["$n":v]trim="$TRANSTIME":"$LENGTH",setpts=PTS-STARTPTS[v"$n"b]; \\" >> ffmpeg_command.part.plus2
                 fi
             else 
                 echo "["$i":a]["$n":a]acrossfade=duration="$TRANSTIME"[outa"$n"]; \\" >> ffmpeg_command.part.plus2
                 echo "["$n":v]trim="$TRANSTIME":"$LENGTH_NI",setpts=PTS-STARTPTS[v"$n"a]; \\" >> ffmpeg_command.part.plus2
             fi
         else
-#            echo "[outa"$i"]["$n":a]acrossfade=duration="$TRANSTIME"[outa]; \\" >> ffmpeg_command.part.plus2
             echo -n "[v"$i"a]" >> ffmpeg_command.part.plus3
             add=$(echo "($add+$ONE)"| bc -l);  
             add="${add%.*}"
