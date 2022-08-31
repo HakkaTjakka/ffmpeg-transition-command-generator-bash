@@ -1,0 +1,6 @@
+[out0][out1][v2a]concat=n=3[outv] \
+" \
+-map "[outv]" \
+-map "[outa]" \
+-c:v h264_nvenc -pix_fmt yuv420p -preset fast -movflags faststart \
+-y output_plus_auto.mp4

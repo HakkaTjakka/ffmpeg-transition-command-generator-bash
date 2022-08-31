@@ -35,7 +35,7 @@ void main(void) {
 
     float rotate=0.0;
     if (isPIP == 1.0) {
-        rotate = 360.0 * progress * 1.0;
+        rotate = 360.0 * progress * 2.0;
     }
     float radians = rotate * PI / 180.0;
     float s = sin(radians);

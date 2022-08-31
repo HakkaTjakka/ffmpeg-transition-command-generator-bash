@@ -1,0 +1,4 @@
+bin1/ffmpeg \
+-i "russel.01.mp4" \
+-i "russel.02.mp4" \
+-i "russel.03.mp4" \
