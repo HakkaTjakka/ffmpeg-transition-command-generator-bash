@@ -1,0 +1,6 @@
+[v0A][out0][v1A][out1][v2A][out2][v3A][out3][v4B]concat=n=9[outv] \
+" \
+-map "[outv]" \
+-an \
+-c:v h264_nvenc -pix_fmt yuv420p -preset fast -movflags faststart -vsync 2 \
+-y output_mp4_3840x2160.mp4

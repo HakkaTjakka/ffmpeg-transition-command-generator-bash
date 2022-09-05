@@ -1,0 +1,6 @@
+bin/ffmpeg \
+-i "mp4_3840x2160/out.01.mp4" \
+-i "mp4_3840x2160/out.02.mp4" \
+-i "mp4_3840x2160/out.03.mp4" \
+-i "mp4_3840x2160/out.04.mp4" \
+-i "mp4_3840x2160/out.05.mp4" \

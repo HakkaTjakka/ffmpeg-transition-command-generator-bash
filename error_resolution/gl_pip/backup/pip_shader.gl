@@ -1,0 +1,83 @@
+uniform sampler2D tex;
+uniform float playTime;
+varying vec2 texCoord;
+
+uniform float scale;
+uniform float isPIP;
+
+uniform float mainWidth;
+uniform float mainHeight;
+uniform float pipWidth;
+uniform float pipHeight;
+
+uniform float mainDuration;
+uniform float pipDuration;
+uniform float startTime;
+
+uniform float scale_w;
+uniform float scale_h;
+//uniform float progress;
+
+void main() {
+//    vec2 scale = vec2(scale_w,scale_h);
+    //vec2 scale = vec2(pipWidth/946.0,pipHeight/2048.0); // 946 × 2048
+
+    //gl_FragColor = texture2D(tex, (texCoord * (0.5 / scale) + (0.5 / scale)));
+    gl_FragColor = texture2D(tex, texCoord).rgba;
+
+    if (gl_FragColor.r==0.0 && gl_FragColor.g==0.0 && gl_FragColor.b==0.0) {
+        gl_FragColor.a = 0.0;
+    } else {
+        
+        if (isPIP < 1.0) {
+            gl_FragColor.a = 1.0-(playTime - startTime) / pipDuration;
+        } else {
+            gl_FragColor.a = (playTime - startTime) / pipDuration;
+        }
+
+    }
+
+
+/*
+    if (isPIP < 1.0) {
+        gl_FragColor = vec4(texture2D(tex, texCoord).rgb, 1.0);
+//        gl_FragColor = vec4(texture2D(tex, vec2(0.5,1.0)*texCoord).rgb, 1.0);
+    } else {
+        gl_FragColor = vec4(texture2D(tex, texCoord).rgba);
+//        gl_FragColor.rgb = vec3(1.0);
+    }
+*/
+
+    //float gray = (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b) / 3.0;
+    //gl_FragColor.r = gray;
+    //gl_FragColor.g = gray;
+    //gl_FragColor.b = gray;
+}
+
+void main2()
+{
+//    vec4 pixel = texture2D(texture_in, gl_TexCoord[0].xy);
+//    vec4 pixel = texture2D(texture, gl_FragCoord.xy/iResolution.xy);
+
+    float progress = (playTime - startTime) / pipDuration;
+
+//    vec2 ratio = vec2();
+
+    gl_FragColor = vec4(texture2D(tex,  texCoord/2.0 ) .rgb, progress);
+//    gl_FragColor = vec4(texture2D(tex,  gl_FragCoord.xy/vec2(mainWidth,mainHeight) ) .rgb, progress);
+
+//    gl_FragColor = vec4(texture2D(tex,  gl_FragCoord.xy/vec2(pipWidth,pipHeight) ) .rgb, progress);
+//    gl_FragColor = vec4(texture2D(tex, gl_TexCoord[0].xy).rgb, progress);
+//    gl_FragColor = vec4(texture2D(tex, texCoord).rgb, progress);
+
+//      gl_FragColor = texture2D(tex, gl_TexCoord[0].xy);
+//      gl_FragColor = texture2D(tex, gl_FragCoord.xy/vec2(mainWidth,mainHeight)) ;
+
+//      gl_FragColor = texture2D(tex,  tex.xy/resolution_source_texture);
+
+//        gl_FragColor = texture2D(tex,  tex.xy/resolution_source_texture);
+//        gl_FragColor.a = gl_FragColor.a * (2.0-gl_FragCoord.z/0.4);
+
+//    gl_FragColor = texelFetch(texture, ivec2( tex_coord.xy ) , 0);
+//    gl_FragColor = texelFetch(texture, ivec2( coord.xy ) , 0);
+}
