@@ -1,0 +1,109 @@
+#version 130
+in vec2 position;
+out vec2 texCoord;
+out float alpha;
+out float beta;
+
+float PI = 3.1415926;
+uniform float playTime;
+uniform float isPIP;
+uniform float mainDuration;
+uniform float pipDuration;
+uniform float startTime;
+
+uniform float mainWidth;
+uniform float mainHeight;
+uniform float pipWidth;
+uniform float pipHeight;
+
+uniform float scale_w;
+uniform float scale_h;
+
+
+void main( void ) {
+    float progress = 0.0;
+    float smooth_progress;
+    float rotate;
+    float aspect;
+    float moveX,moveY;
+    float scale_i;
+
+
+    if ( playTime < 3.0 && mainDuration != 2.0 ) {
+        progress = ( playTime ) / 3.0;
+        if (progress > 0.15 && progress <= 0.25) beta = ( progress - 0.15 ) / ( 0.25 - 0.15 );
+        else if (progress > 0.75 && progress <= 0.85) beta = 1.0 - ( progress - 0.75 ) / ( 0.85 - 0.75 );
+        else if (progress > 0.15 && progress <= 0.85) beta = 1.0;
+        else beta=0.0;
+    } else {
+        beta=0.0;
+    }
+
+
+    if ( isPIP < 1.0 ) {
+        if ( playTime < 3.0 && mainDuration != 2.0 ) {
+            progress = ( playTime ) / 3.0;
+            if ( progress < 0.35 ) {
+                progress = 0.0;
+            } else {
+                progress = ( progress - 0.35 ) / ( 1.0 - 0.35 );
+            }
+            alpha = 1.0 - progress;
+            smooth_progress=smoothstep( 0.0, 1.0, progress );
+            rotate = - 360.0 * smooth_progress * ( 1.0 + (1.0 - progress) * 1.0 );
+        } else {
+            progress = 0.0;
+            alpha = 1.0;
+            smooth_progress=0.0;
+            rotate = 0.0;
+        }
+
+        aspect = 1920.0 / 1080.0;
+        moveX = 0.0 + smooth_progress;
+        moveY = 0.0;
+        scale_i = 1.0 - smooth_progress;
+    } else {
+        if ( playTime < 3.0 && mainDuration != 2.0 ) {
+            progress = ( playTime ) / 3.0;
+            if ( progress < 0.15 ) beta=1.0;
+            if ( progress > 0.65 ) {
+                progress = 1.0;
+            } else {
+                progress = progress / 0.65;
+            }
+            alpha = progress;
+            smooth_progress = smoothstep( 0.0,1.0,progress );
+            rotate = 360.0 * ( 1.0 - smooth_progress ) * ( 1.0 + ( 1.0 - progress ) * 1.0 );
+        } else {
+            progress = 0.0;
+            alpha = 0.0;
+            smooth_progress = 0.0;
+            rotate = 0.0;
+        }
+
+        aspect = 1920.0 / 1080.0;
+        moveX = -1.0 + smooth_progress ;
+        moveY = 0.0;
+        scale_i = smooth_progress;
+    }
+    float radians = rotate * PI / 180.0;
+    float s = sin( radians );
+    float c = cos( radians );
+
+    mat4 zRotation = mat4(
+            c,             -s * aspect,     0.0,    0.0,
+            s / aspect,     c,              0.0,    0.0,
+            0.0,            0.0,            1.0,    0.0,
+            0.0 + moveX,    0.0 + moveY,    0.0,    1.0 
+    );
+
+
+    texCoord.x = position.x * 0.5 + 0.5;
+    texCoord.y = position.y * 0.5 + 0.5;
+    gl_Position = zRotation * vec4( scale_i * position, 0, 1 );
+
+
+    //gl_Position = vec4(scale_i*position , 0, 1);
+//    gl_Position = zRotation * vec4(scale * position * vec2(scale_w,scale_h), 0, 1); // zRotation *        
+//    gl_Position = vec4(position , 0, 1);
+}

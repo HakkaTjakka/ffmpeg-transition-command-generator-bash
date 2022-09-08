@@ -1,0 +1,43 @@
+#version 130
+uniform sampler2D tex;
+uniform float playTime;
+in vec2 texCoord;
+in float alpha;
+out vec4 Color;
+
+uniform float scale;
+uniform float isPIP;
+
+uniform float mainWidth;
+uniform float mainHeight;
+uniform float pipWidth;
+uniform float pipHeight;
+
+uniform float mainDuration;
+uniform float pipDuration;
+uniform float startTime;
+
+uniform float scale_w;
+uniform float scale_h;
+
+
+void main() {
+    Color = texture2D(tex, texCoord).rgba;
+
+    float c=(Color.r+Color.g+Color.g)/3.0;
+    Color.a=c;
+
+
+//    if (Color.r<=0.02 && Color.g<=0.02 && Color.b<=0.02) {
+//        Color.a = 0.0;
+//    } else {
+//        if (isPIP < 1.0) {
+//            gl_FragColor.a = 1.0-(playTime - startTime) / pipDuration;
+//        } else {
+//            gl_FragColor.a = (playTime - startTime) / pipDuration;
+//        }
+//        Color.a = alpha;
+//    }
+    
+}
+

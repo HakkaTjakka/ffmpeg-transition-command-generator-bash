@@ -1,0 +1,132 @@
+attribute vec2 position;
+varying vec2 texCoord;
+
+float PI = 3.1415926;
+uniform float playTime;
+uniform float isPIP;
+uniform float mainDuration;
+uniform float pipDuration;
+uniform float startTime;
+
+uniform float mainWidth;
+uniform float mainHeight;
+uniform float pipWidth;
+uniform float pipHeight;
+
+uniform float scale_w;
+uniform float scale_h;
+
+float aspect = pipWidth / pipHeight;
+
+void main(void) {
+    // float duration = 1.0;
+    // float p_playTime = 0.5;
+    // float progress = mod(playTime, mainDuration) / mainDuration; // 0~1
+    float progress = (playTime - startTime) / pipDuration;
+    if (isPIP < 1.0) {
+        progress=1.0-progress;
+    }
+
+
+    progress=smoothstep( 0.0,1.0,progress);
+
+
+    // genType step (genType edge, genType x)，genType step (float edge, genType x)
+    // if x < edge，0.0 else 1.0
+    // if x >= edge, 1.0 else 0.0
+
+    //float moveX = 0.0 + progress * (1.0 - step(1.0, scale_w));
+    float moveX = 0.0;
+    //float moveY = progress * isPIP - isPIP * 1.0;
+    float moveY = 0.0;
+
+    float rotate=0.0;
+//    if (isPIP == 1.0) {
+        rotate = 360.0 * progress * 1.0;
+//    }
+    float radians = rotate * PI / 180.0;
+    float s = sin(radians);
+    float c = cos(radians);
+    float c1,s1;
+    if (isPIP < 1.0) {
+//        c1=(0.25+progress*1.75)*c;
+//        s1=(0.25+progress*1.75)*s;
+//        c1=1.0*c;
+//        s1=1.0*s;
+        c1=c;
+        s1=s;
+    } else {
+        c1=c;
+        s1=s;
+    }
+
+
+    mat4 zRotation = mat4(
+//            c *0.5,      -s,     0.0,    0.0, // 1:scale-x 4:y轴翻转 逆时针
+//            c * max(0.5, isPIP + 0.5),      -s,     0.0,    0.0, // 1:scale-x 4:y轴翻转 逆时针
+//            c * min(1., isPIP + 0.5),      -s,     0.0,    0.0, // 1:scale-x 4:y轴翻转 逆时针
+//            c1 * min(1., isPIP + 0.5),      -s*aspect,     0.0,    0.0, // 1:scale-x 4:y轴翻转 逆时针
+            c1,            -s1*aspect,             0.0,    0.0,    // 1:scale-x 4:y轴翻转 逆时针
+            s1/aspect,             c1,             0.0,    0.0,    // 2:scale-y 4:x轴翻转 顺时针 也可以用scale的uniform
+            0.0,            0.0,            1.0,    0.0,
+//            0.0 ,    0.0 ,    0.0,    1.0     // 1:mv right 2:mv up
+            0.0 + moveX,    0.0 + moveY,    0.0,    1.0     // 1:mv right 2:mv up
+    );
+
+// mat4 rotateXYZ =
+//     mat4(   vec4(1,   0,    0, 0),
+//             vec4(0, c_x, -s_x/aspect, 0),
+//             vec4(0, s_x*aspect,  c_x, 0),
+//             vec4(0,   0,    0, 1)                       ) *
+//     mat4(   vec4( c_y, 0, s_y, 0),
+//             vec4(   0, 1,   0, 0),
+//             vec4(-s_y, 0, c_y, 0),
+//             vec4(   0, 0,   0, 1)                       ) *
+//     mat4(   vec4(c_z,           -s_z*aspect,    0, 0),
+//             vec4(s_z/aspect,    c_z,            0, 0),
+//             vec4(0,             0,              1, 0),
+//             vec4(0,             0,              0, 1)   );
+// 
+
+    texCoord.x = position.x * 0.5 + 0.5;
+    texCoord.y = position.y * 0.5 + 0.5;
+    //texCoord.x = 1600.0/pipWidth *(position.x * 0.5 + 0.5);
+    //texCoord.y = 1200.0/pipHeight*(position.y * 0.5 + 0.5);
+    //gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    //texCoord.xy=gl_TexCoord[0].xy;
+    //gl_Position = zRotation * vec4(position * 1.0, 0, 1);
+//    if (isPIP < 1.0) {
+//        gl_Position = zRotation * vec4(position * vec2(1.0,1.0), 0, 1);
+//    } else {
+//        gl_Position = zRotation * vec4(position * vec2(1.0,1.0), 0, 1);
+//        gl_Position = vec4(position * vec2(scale_w, 0.5*scale_h), 0, 1);
+
+//        gl_Position = zRotation * vec4( position * vec2(scale_w, scale_h/2.0), 0, 1);
+//        gl_Position.x/=2.0;
+
+        gl_Position = vec4(position , 0, 1); // zRotation *        
+//        if (isPIP == 1.0) {
+//            gl_Position.x+=0.1;
+//        }
+        
+//        gl_Position = zRotation * vec4(position , 0, 1); // zRotation *        
+//        gl_Position = zRotation * vec4(position * vec2(scale_w,scale_h), 0, 1); // zRotation *        
+
+        //gl_Position = gl_ModelViewProjectionMatrix * gl_Position;
+
+//    }
+    //gl_Position = vec4(position * 1.0, 0, 1);
+}
+
+void main2()
+{
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+    gl_FrontColor = gl_Color;
+    texCoord.x = position.x * 0.5 ;
+    texCoord.y = position.y * 0.5 ;
+//    texCoord.x = position.x * 0.5 + 0.5;
+//    texCoord.y = position.y * 0.5 + 0.5;
+    //texCoord = gl_TexCoord[0].xy;
+    gl_Position = vec4(position, 0, 1);
+}
